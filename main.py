@@ -62,9 +62,11 @@ for index, row in dataframe.iterrows():
 cod1 = str(input('Codigo 1er aeropuerto:'))
 cod2 = str(input('Codigo 2do aeropuerto:'))
 if estan_conectados(G, cod1, cod2):
-    print('Los aeropuertos seleccionados estan conectados')
+    linked = True
+    
 else:
-    print('Los aeropuertos seleccionados NO estan conectados')
+    linked= False
+    
     
 op1 = int(input("Empezar? 1.SI"))
 while op1 ==1:
@@ -75,7 +77,11 @@ while op1 ==1:
     elif op2 ==2:
         dataandpaths(cod1, G)
     else:
-        MPbetweeenairports(cod1, cod2, G)
+        if linked:
+            MPbetweeenairports(cod1, cod2, G)
+        else:
+            print('Los aeropuertos seleccionados NO estan conectados')
+        
     op1 = int(input("Seguir? 1.SI"))
 
 
