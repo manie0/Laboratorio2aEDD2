@@ -38,6 +38,7 @@ def MPbetweeenairports(cod1, cod2, G):
 
     # Muestra la información de los aeropuertos en el camino mínimo
     popup = []
+    
     print("Información de los aeropuertos en el camino mínimo:")
     for airport_code in shortest_path:
         airport_info = G.nodes[airport_code]
@@ -50,6 +51,7 @@ def MPbetweeenairports(cod1, cod2, G):
         popup.append(airport_info['country'])
         print(f"Latitud: {airport_info['latitude']}")
         print(f"Longitud: {airport_info['longitude']}\n")
+        
 
     # Recorre la lista de latitudes
     index = 0
@@ -61,13 +63,12 @@ def MPbetweeenairports(cod1, cod2, G):
     #result = {"airport_coordinates": Points, "lista_source": LLsource, "lista_destino": LLdestination}
     m = folium.Map(location=[0, 0], zoom_start=12)
     # Añadir aeropuertos (marcadores) al objeto mapa
+    i=0
     for airport, lat, lon in Points:
-        if popup == None:
-            popup_text = f"Codigo: {airport}"
-        else:
-            popup_text = f"Codigo: {airport} \nNombre: {popup[0]} \nCiudad: {popup[1]}\nPais: {popup[2]}\nLatitud: {lat}\nLongitud:{lon}"
+        popup_text = f"Codigo: {airport} \nNombre: {popup[i]} \nCiudad: {popup[i+1]}\nPais: {popup[i+2]}\nLatitud: {lat}\nLongitud:{lon}"
         marker = folium.Marker(location=[lat,lon], popup=popup_text)
         marker.add_to(m)
+        i+=3
 
     # Añadir aristas al objeto mapa
     index=0
